@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#eef1f6" />
+  <title>Tugas — freelance.fortech</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- ============ HEADER ============ -->
+    <header class="header">
+      <div class="brand">freelance<span>.fortech</span></div>
+      <button class="header-icon" aria-label="Notifikasi">
+        <i data-lucide="bell"></i>
+      </button>
+    </header>
+
+    <!-- ============ PAGE TITLE ============ -->
+    <div class="page-title">
+      <h1>Tugas</h1>
+      <p>Kerjakan, dapat cuan 💰</p>
+    </div>
+
+    <!-- ============ PANEL TUGAS AKTIF (hidden default) ============ -->
+    <section class="active-task hidden" id="activeTaskPanel">
+      <div class="active-task-head">
+        <span class="pulse"></span>
+        <h3>Tugas Aktif</h3>
+      </div>
+
+      <ul class="materi-list">
+        <li>
+          <span class="num">1</span>
+          <span>Buka website <b>gmail.cuan4dev.biz.id</b> lewat browser HP kamu.</span>
+        </li>
+        <li>
+          <span class="num">2</span>
+          <span>Rekam video review singkat (min. 15 detik) tentang tampilan & fitur website.</span>
+        </li>
+        <li>
+          <span class="num">3</span>
+          <span>Upload video ke TikTok, jangan lupa kasih caption + hashtag menarik.</span>
+        </li>
+        <li>
+          <span class="num">4</span>
+          <span>Copy link video TikTok-nya, lalu tekan tombol <b>Submit Tugas</b> di bawah.</span>
+        </li>
+        <li>
+          <span class="num">5</span>
+          <span>Bayaran dihitung <b>Rp1.000 per 500 view</b> per video.</span>
+        </li>
+      </ul>
+
+      <button class="btn btn-primary" id="btnShowForm">
+        <i data-lucide="send"></i>
+        Submit Tugas
+      </button>
+    </section>
+
+    <!-- ============ FORM SUBMIT (hidden default) ============ -->
+    <section class="active-task hidden" id="submitFormPanel">
+      <div class="active-task-head">
+        <span class="pulse"></span>
+        <h3>Form Pengiriman</h3>
+      </div>
+
+      <form id="submitForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="usernameTiktok">Username TikTok</label>
+          <input
+            type="text"
+            id="usernameTiktok"
+            class="form-input"
+            placeholder="@username"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="linkVideo">Link Video TikTok</label>
+          <input
+            type="url"
+            id="linkVideo"
+            class="form-input"
+            placeholder="https://vt.tiktok.com/..."
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-success" id="btnKirim">
+          <i data-lucide="check-circle"></i>
+          Kirim Sekarang
+        </button>
+      </form>
+    </section>
+
+    <!-- ============ DAFTAR TUGAS ============ -->
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">Daftar Tugas</div>
+      </div>
+
+      <!-- TUGAS 1 -->
+      <div class="task-card" id="taskCard1">
+        <div class="task-head">
+          <span class="task-badge active">Tersedia</span>
+        </div>
+        <div class="task-title">🎬 Promosi gmail.cuan4dev.biz.id</div>
+        <div class="task-desc">
+          Review website gmail.cuan4dev.biz.id di TikTok kamu. Semakin banyak view, semakin besar bayarannya.
+        </div>
+
+        <div class="task-meta">
+          <span class="amount">Rp1.000</span>
+          <span class="per">/ 500 view</span>
+        </div>
+
+        <button class="btn btn-primary" id="btnStartTask">
+          <i data-lucide="play-circle"></i>
+          Start Task
+        </button>
+      </div>
+
+      <!-- TUGAS 2 (coming soon) -->
+      <div class="task-card disabled">
+        <div class="task-head">
+          <span class="task-badge locked">🔒 Locked</span>
+        </div>
+        <div class="task-title">Tugas 2</div>
+        <div class="task-desc">Coming soon. Pantau terus ya!</div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- ============ BOTTOM NAV ============ -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <div class="icon"><i data-lucide="home"></i></div>
+      <span class="label">Beranda</span>
+    </a>
+
+    <a href="tugas.html" class="nav-item active">
+      <div class="icon"><i data-lucide="clipboard-list"></i></div>
+      <span class="label">Tugas</span>
+    </a>
+
+    <a href="wd.html" class="nav-item">
+      <div class="icon"><i data-lucide="wallet"></i></div>
+      <span class="label">Withdraw</span>
+    </a>
+
+    <a href="riwayat.html" class="nav-item">
+      <div class="icon"><i data-lucide="history"></i></div>
+      <span class="label">Riwayat</span>
+    </a>
+
+    <a href="akun.html" class="nav-item">
+      <div class="icon"><i data-lucide="user"></i></div>
+      <span class="label">Akun</span>
+    </a>
+  </nav>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+
+    /* ========== ELEMEN ========== */
+    const btnStartTask   = document.getElementById('btnStartTask');
+    const btnShowForm    = document.getElementById('btnShowForm');
+    const activePanel    = document.getElementById('activeTaskPanel');
+    const formPanel      = document.getElementById('submitFormPanel');
+    const submitForm     = document.getElementById('submitForm');
+    const taskCard1      = document.getElementById('taskCard1');
+
+    /* ========== STATE dari localStorage ========== */
+    // kalau user udah pernah start, langsung tampilkan panel tugas aktif
+    const taskActive = localStorage.getItem('fortech_task1_active') === '1';
+    const taskDone   = localStorage.getItem('fortech_task1_done') === '1';
+
+    if (taskActive && !taskDone) {
+      activePanel.classList.remove('hidden');
+      taskCard1.classList.add('disabled');
+    }
+
+    if (taskDone) {
+      taskCard1.classList.add('disabled');
+      taskCard1.querySelector('.task-badge').textContent = '✓ Selesai';
+      taskCard1.querySelector('.task-badge').classList.remove('active');
+      taskCard1.querySelector('.task-badge').classList.add('locked');
+      taskCard1.querySelector('.btn').textContent = 'Sudah Dikirim';
+      taskCard1.querySelector('.btn').disabled = true;
+    }
+
+    /* ========== START TASK ========== */
+    btnStartTask.addEventListener('click', () => {
+      localStorage.setItem('fortech_task1_active', '1');
+      activePanel.classList.remove('hidden');
+      taskCard1.classList.add('disabled');
+
+      // scroll halus ke panel
+      activePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    /* ========== SHOW FORM ========== */
+    btnShowForm.addEventListener('click', () => {
+      formPanel.classList.remove('hidden');
+      formPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    /* ========== SUBMIT FORM ========== */
+    submitForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('usernameTiktok').value.trim();
+      const link     = document.getElementById('linkVideo').value.trim();
+
+      // validasi sederhana
+      if (!username) {
+        alert('Username TikTok wajib diisi ya!');
+        return;
+      }
+      if (!link || !link.startsWith('http')) {
+        alert('Link video TikTok tidak valid.');
+        return;
+      }
+
+      // simpan data tugas
+      const submission = {
+        task: 'TUGAS 1 - Promosi gmail.cuan4dev.biz.id',
+        username,
+        link,
+        date: new Date().toISOString(),
+        status: 'pending',
+      };
+
+      // simpan ke riwayat
+      const riwayat = JSON.parse(localStorage.getItem('fortech_riwayat') || '[]');
+      riwayat.unshift({
+        icon: 'video',
+        title: 'Promosi gmail.cuan4dev.biz.id',
+        sub: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) + ' · Menunggu review',
+        amount: 'Rp0',
+        type: 'pending',
+      });
+      localStorage.setItem('fortech_riwayat', JSON.stringify(riwayat));
+
+      localStorage.setItem('fortech_task1_done', '1');
+      localStorage.setItem('fortech_task1_submission', JSON.stringify(submission));
+
+      // update UI
+      taskCard1.querySelector('.task-badge').textContent = '✓ Selesai';
+      taskCard1.querySelector('.task-badge').classList.remove('active');
+      taskCard1.querySelector('.task-badge').classList.add('locked');
+      taskCard1.querySelector('.btn').textContent = 'Sudah Dikirim';
+      taskCard1.querySelector('.btn').disabled = true;
+
+      formPanel.classList.add('hidden');
+      activePanel.classList.add('hidden');
+
+      alert('✅ Tugas berhasil dikirim!\nCek status di halaman Riwayat.');
+      window.location.href = 'riwayat.html';
+    });
+  </script>
+
+</body>
+</html>
