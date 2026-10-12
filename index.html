@@ -3,15 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#eef1f6" />
+  <meta name="theme-color" content="#a5b4fc" />
   <title>Beranda — freelance.fortech</title>
 
-  <!-- Font Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -28,7 +25,7 @@
 
     <!-- ============ GREETING ============ -->
     <div class="greeting">
-      <h2>Halo, User 👋</h2>
+      <h2>Halo, User <i data-lucide="hand"></i></h2>
     </div>
 
     <!-- ============ CARD SALDO ============ -->
@@ -78,18 +75,15 @@
       </div>
     </section>
 
-    <!-- ============ AKTIVITAS TERBARU ============ -->
+    <!-- ============ TUGAS AKTIF ============ -->
     <section class="section">
       <div class="section-head">
-        <div class="section-title">Aktivitas Terbaru</div>
-        <a href="riwayat.html" class="section-link">Lihat semua</a>
+        <div class="section-title">Tugas Aktif</div>
+        <a href="tugas.html" class="section-link">Lihat semua</a>
       </div>
 
-      <div class="empty-state">
-        <span class="emoji">🚀</span>
-        <div class="title">Belum ada aktivitas</div>
-        <div class="desc">Yuk mulai kerjakan tugas pertamamu!</div>
-      </div>
+      <!-- Container tugas aktif (di-render via JS) -->
+      <div id="activeTaskContainer"></div>
     </section>
 
   </div>
@@ -125,13 +119,62 @@
   <!-- ============ SCRIPTS ============ -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
-    // Render semua icon Lucide
     lucide.createIcons();
 
-    // Placeholder saldo (nanti bisa diambil dari localStorage / backend)
-    const saldo = localStorage.getItem('fortech_saldo') || 0;
+    /* ========== SALDO ========== */
+    const saldo = Number(localStorage.getItem('fortech_saldo') || 0);
     document.getElementById('saldoText').textContent =
-      'Rp ' + Number(saldo).toLocaleString('id-ID');
+      'Rp ' + saldo.toLocaleString('id-ID');
+
+    /* ========== TUGAS AKTIF ========== */
+    const container   = document.getElementById('activeTaskContainer');
+    const task1Active = localStorage.getItem('fortech_task1_active') === '1';
+    const task1Done   = localStorage.getItem('fortech_task1_done') === '1';
+
+    // Cek apakah ada tugas yang lagi dikerjain (belum submit)
+    const hasActiveTask = task1Active && !task1Done;
+
+    if (hasActiveTask) {
+      // Render card tugas aktif
+      container.innerHTML = `
+        <div class="task-card">
+          <div class="task-head">
+            <span class="task-badge active">
+              <i data-lucide="play-circle"></i> Sedang Dikerjakan
+            </span>
+          </div>
+          <div class="task-title">
+            <i data-lucide="clapperboard"></i>
+            Promosi gmail.cuan4dev.biz.id
+          </div>
+          <div class="task-desc">
+            Review website gmail.cuan4dev.biz.id di TikTok kamu, lalu submit link video-nya.
+          </div>
+
+          <div class="task-meta">
+            <span class="amount">Rp1.000</span>
+            <span class="per">/ 500 view</span>
+          </div>
+
+          <a href="tugas.html" class="btn btn-primary">
+            <i data-lucide="arrow-right"></i>
+            Lanjutkan Tugas
+          </a>
+        </div>
+      `;
+    } else {
+      // Empty state
+      container.innerHTML = `
+        <div class="empty-state">
+          <span class="emoji"><i data-lucide="clipboard-x"></i></span>
+          <div class="title">Belum ada tugas aktif</div>
+          <div class="desc">Yuk mulai kerjakan tugas pertamamu!</div>
+        </div>
+      `;
+    }
+
+    // Re-render icon Lucide (karena di-inject via JS)
+    lucide.createIcons();
   </script>
 
 </body>
