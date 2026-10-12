@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#eef1f6" />
+  <title>Beranda — freelance.fortech</title>
+
+  <!-- Font Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- ============ HEADER ============ -->
+    <header class="header">
+      <div class="brand">freelance<span>.fortech</span></div>
+      <button class="header-icon" aria-label="Notifikasi">
+        <i data-lucide="bell"></i>
+      </button>
+    </header>
+
+    <!-- ============ GREETING ============ -->
+    <div class="greeting">
+      <h2>Halo, User 👋</h2>
+    </div>
+
+    <!-- ============ CARD SALDO ============ -->
+    <section class="balance-card">
+      <div class="balance-label">Saldo Kamu</div>
+      <div class="balance-amount" id="saldoText">Rp 0</div>
+      <div class="balance-status">
+        <span class="dot"></span>
+        <span>Siap ditarik</span>
+      </div>
+    </section>
+
+    <!-- ============ SHORTCUT ============ -->
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">Menu Cepat</div>
+      </div>
+
+      <div class="shortcut-grid">
+        <a href="tugas.html" class="shortcut">
+          <div class="shortcut-icon">
+            <i data-lucide="clipboard-list"></i>
+          </div>
+          <div class="shortcut-label">Tugas</div>
+        </a>
+
+        <a href="wd.html" class="shortcut">
+          <div class="shortcut-icon">
+            <i data-lucide="wallet"></i>
+          </div>
+          <div class="shortcut-label">Withdraw</div>
+        </a>
+
+        <a href="riwayat.html" class="shortcut">
+          <div class="shortcut-icon">
+            <i data-lucide="history"></i>
+          </div>
+          <div class="shortcut-label">Riwayat</div>
+        </a>
+
+        <a href="akun.html" class="shortcut">
+          <div class="shortcut-icon">
+            <i data-lucide="user"></i>
+          </div>
+          <div class="shortcut-label">Akun</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ AKTIVITAS TERBARU ============ -->
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">Aktivitas Terbaru</div>
+        <a href="riwayat.html" class="section-link">Lihat semua</a>
+      </div>
+
+      <div class="empty-state">
+        <span class="emoji">🚀</span>
+        <div class="title">Belum ada aktivitas</div>
+        <div class="desc">Yuk mulai kerjakan tugas pertamamu!</div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============ BOTTOM NAV ============ -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item active">
+      <div class="icon"><i data-lucide="home"></i></div>
+      <span class="label">Beranda</span>
+    </a>
+
+    <a href="tugas.html" class="nav-item">
+      <div class="icon"><i data-lucide="clipboard-list"></i></div>
+      <span class="label">Tugas</span>
+    </a>
+
+    <a href="wd.html" class="nav-item">
+      <div class="icon"><i data-lucide="wallet"></i></div>
+      <span class="label">Withdraw</span>
+    </a>
+
+    <a href="riwayat.html" class="nav-item">
+      <div class="icon"><i data-lucide="history"></i></div>
+      <span class="label">Riwayat</span>
+    </a>
+
+    <a href="akun.html" class="nav-item">
+      <div class="icon"><i data-lucide="user"></i></div>
+      <span class="label">Akun</span>
+    </a>
+  </nav>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    // Render semua icon Lucide
+    lucide.createIcons();
+
+    // Placeholder saldo (nanti bisa diambil dari localStorage / backend)
+    const saldo = localStorage.getItem('fortech_saldo') || 0;
+    document.getElementById('saldoText').textContent =
+      'Rp ' + Number(saldo).toLocaleString('id-ID');
+  </script>
+
+</body>
+</html>
