@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#eef1f6" />
+  <title>Withdraw — freelance.fortech</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- ============ HEADER ============ -->
+    <header class="header">
+      <div class="brand">freelance<span>.fortech</span></div>
+      <button class="header-icon" aria-label="Notifikasi">
+        <i data-lucide="bell"></i>
+      </button>
+    </header>
+
+    <!-- ============ PAGE TITLE ============ -->
+    <div class="page-title">
+      <h1>Withdraw</h1>
+      <p>Tarik saldo kamu ke e-wallet</p>
+    </div>
+
+    <!-- ============ CARD SALDO ============ -->
+    <section class="balance-card">
+      <div class="balance-label">Saldo Tersedia</div>
+      <div class="balance-amount" id="saldoText">Rp 0</div>
+      <div class="balance-status">
+        <span class="dot"></span>
+        <span>Minimum WD Rp5.000</span>
+      </div>
+    </section>
+
+    <!-- ============ FORM WD ============ -->
+    <section class="section">
+      <form id="wdForm" novalidate>
+
+        <!-- Pilih Metode -->
+        <div class="form-group">
+          <label class="form-label">Metode Pembayaran</label>
+          <div class="payment-grid">
+            <div class="payment-option" data-method="gopay" id="optGopay">
+              <div class="emoji">🟢</div>
+              <div class="name">GoPay</div>
+            </div>
+
+            <div class="payment-option" data-method="dana" id="optDana">
+              <div class="emoji">🔵</div>
+              <div class="name">DANA</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nomor Wallet -->
+        <div class="form-group">
+          <label class="form-label" for="nomorWallet">Nomor Wallet Tujuan</label>
+          <input
+            type="tel"
+            id="nomorWallet"
+            class="form-input"
+            placeholder="08xxxxxxxxxx"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <!-- Jumlah -->
+        <div class="form-group">
+          <label class="form-label" for="jumlahWd">Jumlah Penarikan</label>
+          <input
+            type="tel"
+            id="jumlahWd"
+            class="form-input"
+            placeholder="Rp 0"
+            inputmode="numeric"
+            autocomplete="off"
+            required
+          />
+          <div class="form-hint">
+            <i data-lucide="info"></i>
+            <span>Minimum withdraw <b>Rp5.000</b></span>
+          </div>
+        </div>
+
+        <!-- Tombol Submit -->
+        <button type="submit" class="btn btn-primary" id="btnAjukan" disabled>
+          <i data-lucide="send"></i>
+          Ajukan Withdraw
+        </button>
+
+      </form>
+    </section>
+
+  </div>
+
+  <!-- ============ BOTTOM NAV ============ -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <div class="icon"><i data-lucide="home"></i></div>
+      <span class="label">Beranda</span>
+    </a>
+
+    <a href="tugas.html" class="nav-item">
+      <div class="icon"><i data-lucide="clipboard-list"></i></div>
+      <span class="label">Tugas</span>
+    </a>
+
+    <a href="wd.html" class="nav-item active">
+      <div class="icon"><i data-lucide="wallet"></i></div>
+      <span class="label">Withdraw</span>
+    </a>
+
+    <a href="riwayat.html" class="nav-item">
+      <div class="icon"><i data-lucide="history"></i></div>
+      <span class="label">Riwayat</span>
+    </a>
+
+    <a href="akun.html" class="nav-item">
+      <div class="icon"><i data-lucide="user"></i></div>
+      <span class="label">Akun</span>
+    </a>
+  </nav>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+
+    /* ========== ELEMEN ========== */
+    const saldoText   = document.getElementById('saldoText');
+    const optGopay    = document.getElementById('optGopay');
+    const optDana     = document.getElementById('optDana');
+    const nomorWallet = document.getElementById('nomorWallet');
+    const jumlahWd    = document.getElementById('jumlahWd');
+    const btnAjukan   = document.getElementById('btnAjukan');
+    const wdForm      = document.getElementById('wdForm');
+
+    /* ========== STATE ========== */
+    let saldo = Number(localStorage.getItem('fortech_saldo') || 0);
+    let metode = null;
+    const MIN_WD = 5000;
+
+    /* ========== RENDER SALDO ========== */
+    function renderSaldo() {
+      saldoText.textContent = 'Rp ' + saldo.toLocaleString('id-ID');
+    }
+    renderSaldo();
+
+    /* ========== PILIH METODE ========== */
+    [optGopay, optDana].forEach(opt => {
+      opt.addEventListener('click', () => {
+        optGopay.classList.remove('active');
+        optDana.classList.remove('active');
+        opt.classList.add('active');
+        metode = opt.dataset.method;
+        validateForm();
+      });
+    });
+
+    /* ========== INPUT NOMOR — hanya angka ========== */
+    nomorWallet.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/\D/g, '');
+      validateForm();
+    });
+
+    /* ========== INPUT JUMLAH — hanya angka + format Rp ========== */
+    jumlahWd.addEventListener('input', (e) => {
+      const raw = e.target.value.replace(/\D/g, '');
+      if (!raw) {
+        e.target.value = '';
+        validateForm();
+        return;
+      }
+      e.target.value = 'Rp ' + Number(raw).toLocaleString('id-ID');
+      validateForm();
+    });
+
+    /* ========== VALIDASI FORM ========== */
+    function validateForm() {
+      const nomor = nomorWallet.value.trim();
+      const jumlah = Number(jumlahWd.value.replace(/\D/g, ''));
+
+      const isNomorValid = nomor.length >= 9 && nomor.length <= 15;
+      const isJumlahValid = jumlah >= MIN_WD && jumlah <= saldo;
+      const isMetodeValid = !!metode;
+
+      btnAjukan.disabled = !(isNomorValid && isJumlahValid && isMetodeValid);
+    }
+
+    /* ========== SUBMIT ========== */
+    wdForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nomor = nomorWallet.value.trim();
+      const jumlah = Number(jumlahWd.value.replace(/\D/g, ''));
+
+      // validasi final
+      if (!metode) {
+        alert('Pilih metode pembayaran dulu ya!');
+        return;
+      }
+      if (nomor.length < 9) {
+        alert('Nomor wallet tidak valid.');
+        return;
+      }
+      if (jumlah < MIN_WD) {
+        alert('Minimum withdraw Rp5.000');
+        return;
+      }
+      if (jumlah > saldo) {
+        alert('Saldo kamu tidak cukup untuk WD sebesar itu.');
+        return;
+      }
+
+      // konfirmasi
+      const labelMetode = metode === 'gopay' ? 'GoPay' : 'DANA';
+      const ok = confirm(
+        `Konfirmasi Withdraw\n\n` +
+        `Metode: ${labelMetode}\n` +
+        `Nomor : ${nomor}\n` +
+        `Jumlah: Rp${jumlah.toLocaleString('id-ID')}\n\n` +
+        `Lanjutkan?`
+      );
+      if (!ok) return;
+
+      // kurangi saldo
+      saldo -= jumlah;
+      localStorage.setItem('fortech_saldo', saldo);
+
+      // simpan ke riwayat
+      const riwayat = JSON.parse(localStorage.getItem('fortech_riwayat') || '[]');
+      riwayat.unshift({
+        icon: 'wallet',
+        title: `Withdraw ${labelMetode}`,
+        sub: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) + ' · Diproses',
+        amount: '-Rp' + jumlah.toLocaleString('id-ID'),
+        type: 'minus',
+      });
+      localStorage.setItem('fortech_riwayat', JSON.stringify(riwayat));
+
+      // reset & update UI
+      renderSaldo();
+      wdForm.reset();
+      optGopay.classList.remove('active');
+      optDana.classList.remove('active');
+      metode = null;
+      btnAjukan.disabled = true;
+
+      alert('✅ Pengajuan withdraw berhasil!\nDana akan diproses dalam 1x24 jam.');
+      window.location.href = 'riwayat.html';
+    });
+  </script>
+
+</body>
+</html>
