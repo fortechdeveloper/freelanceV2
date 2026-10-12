@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#eef1f6" />
+  <meta name="theme-color" content="#1a1d2e" />
   <title>Tugas — freelance.fortech</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,7 +26,7 @@
     <!-- ============ PAGE TITLE ============ -->
     <div class="page-title">
       <h1>Tugas</h1>
-      <p>Kerjakan, dapat cuan 💰</p>
+      <p>Promosikan, dapat cuan 💰</p>
     </div>
 
     <!-- ============ PANEL TUGAS AKTIF (hidden default) ============ -->
@@ -43,18 +43,31 @@
         </li>
         <li>
           <span class="num">2</span>
-          <span>Rekam video review singkat (min. 15 detik) tentang tampilan & fitur website.</span>
+          <span>Buat video <b>promosi</b> singkat (min. 15 detik) yang menarik tentang website <b>gmail.cuan4dev.biz.id</b>.</span>
         </li>
         <li>
           <span class="num">3</span>
-          <span>Upload video ke TikTok, jangan lupa kasih caption + hashtag menarik.</span>
+          <span>Upload video ke TikTok dengan caption yang menarik.</span>
         </li>
         <li>
           <span class="num">4</span>
-          <span>Copy link video TikTok-nya, lalu tekan tombol <b>Submit Tugas</b> di bawah.</span>
+          <span>
+            <b>WAJIB</b> sertakan hashtag berikut di caption:
+            <div class="hashtag-box" style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;">
+              <span class="hashtag">#freelancegmail</span>
+              <span class="hashtag">#freelancegratis</span>
+              <span class="hashtag">#freelance4tech</span>
+              <span class="hashtag">#madeinfortechlab</span>
+              <span class="hashtag">#fortechdev</span>
+            </div>
+          </span>
         </li>
         <li>
           <span class="num">5</span>
+          <span>Copy link video TikTok-nya, lalu tekan tombol <b>Submit Tugas</b> di bawah.</span>
+        </li>
+        <li>
+          <span class="num">6</span>
           <span>Bayaran dihitung <b>Rp1.000 per 500 view</b> per video.</span>
         </li>
       </ul>
@@ -115,9 +128,12 @@
         <div class="task-head">
           <span class="task-badge active">Tersedia</span>
         </div>
-        <div class="task-title">🎬 Promosi gmail.cuan4dev.biz.id</div>
+        <div class="task-title">
+          <i data-lucide="megaphone"></i>
+          Promosi gmail.cuan4dev.biz.id
+        </div>
         <div class="task-desc">
-          Review website gmail.cuan4dev.biz.id di TikTok kamu. Semakin banyak view, semakin besar bayarannya.
+          Buat video promosi website gmail.cuan4dev.biz.id di TikTok kamu. Wajib pakai hashtag yang ditentukan. Semakin banyak view, semakin besar bayarannya.
         </div>
 
         <div class="task-meta">
@@ -134,7 +150,9 @@
       <!-- TUGAS 2 (coming soon) -->
       <div class="task-card disabled">
         <div class="task-head">
-          <span class="task-badge locked">🔒 Locked</span>
+          <span class="task-badge locked">
+            <i data-lucide="lock"></i>Locked
+          </span>
         </div>
         <div class="task-title">Tugas 2</div>
         <div class="task-desc">Coming soon. Pantau terus ya!</div>
@@ -185,8 +203,7 @@
     const submitForm     = document.getElementById('submitForm');
     const taskCard1      = document.getElementById('taskCard1');
 
-    /* ========== STATE dari localStorage ========== */
-    // kalau user udah pernah start, langsung tampilkan panel tugas aktif
+    /* ========== STATE ========== */
     const taskActive = localStorage.getItem('fortech_task1_active') === '1';
     const taskDone   = localStorage.getItem('fortech_task1_done') === '1';
 
@@ -197,7 +214,7 @@
 
     if (taskDone) {
       taskCard1.classList.add('disabled');
-      taskCard1.querySelector('.task-badge').textContent = '✓ Selesai';
+      taskCard1.querySelector('.task-badge').textContent = 'Selesai';
       taskCard1.querySelector('.task-badge').classList.remove('active');
       taskCard1.querySelector('.task-badge').classList.add('locked');
       taskCard1.querySelector('.btn').textContent = 'Sudah Dikirim';
@@ -209,8 +226,6 @@
       localStorage.setItem('fortech_task1_active', '1');
       activePanel.classList.remove('hidden');
       taskCard1.classList.add('disabled');
-
-      // scroll halus ke panel
       activePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
@@ -227,7 +242,6 @@
       const username = document.getElementById('usernameTiktok').value.trim();
       const link     = document.getElementById('linkVideo').value.trim();
 
-      // validasi sederhana
       if (!username) {
         alert('Username TikTok wajib diisi ya!');
         return;
@@ -237,16 +251,15 @@
         return;
       }
 
-      // simpan data tugas
       const submission = {
         task: 'TUGAS 1 - Promosi gmail.cuan4dev.biz.id',
         username,
         link,
+        hashtags: ['#freelancegmail','#freelancegratis','#freelance4tech','#madeinfortechlab','#fortechdev'],
         date: new Date().toISOString(),
         status: 'pending',
       };
 
-      // simpan ke riwayat
       const riwayat = JSON.parse(localStorage.getItem('fortech_riwayat') || '[]');
       riwayat.unshift({
         icon: 'video',
@@ -260,8 +273,7 @@
       localStorage.setItem('fortech_task1_done', '1');
       localStorage.setItem('fortech_task1_submission', JSON.stringify(submission));
 
-      // update UI
-      taskCard1.querySelector('.task-badge').textContent = '✓ Selesai';
+      taskCard1.querySelector('.task-badge').textContent = 'Selesai';
       taskCard1.querySelector('.task-badge').classList.remove('active');
       taskCard1.querySelector('.task-badge').classList.add('locked');
       taskCard1.querySelector('.btn').textContent = 'Sudah Dikirim';
@@ -270,7 +282,7 @@
       formPanel.classList.add('hidden');
       activePanel.classList.add('hidden');
 
-      alert('✅ Tugas berhasil dikirim!\nCek status di halaman Riwayat.');
+      alert('Tugas berhasil dikirim!\nCek status di halaman Riwayat.');
       window.location.href = 'riwayat.html';
     });
   </script>
