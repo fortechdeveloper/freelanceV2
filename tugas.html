@@ -29,14 +29,15 @@
       <p>Promosikan, dapat cuan 💰</p>
     </div>
 
-    <!-- ============ PANEL TUGAS AKTIF ============ -->
-    <section class="active-task hidden" id="activeTaskPanel">
+    <!-- ======================================================
+         PANEL TUGAS 1 AKTIF
+         ====================================================== -->
+    <section class="active-task hidden" id="activeTask1Panel">
       <div class="active-task-head">
         <span class="pulse"></span>
-        <h3>Tugas Aktif</h3>
+        <h3>Tugas 1 — Aktif</h3>
       </div>
 
-      <!-- LANGKAH-LANGKAH -->
       <ul class="materi-list">
         <li>
           <span class="num">1</span>
@@ -73,7 +74,6 @@
         </li>
       </ul>
 
-      <!-- ============ RULES PENTING ============ -->
       <div class="rules-box">
         <div class="rules-head">
           <i data-lucide="alert-triangle"></i>
@@ -109,20 +109,20 @@
         </ul>
       </div>
 
-      <button class="btn btn-primary" id="btnShowForm">
+      <button class="btn btn-primary" id="btnShowForm1">
         <i data-lucide="send"></i>
         Submit Tugas
       </button>
     </section>
 
-    <!-- ============ FORM SUBMIT ============ -->
-    <section class="active-task hidden" id="submitFormPanel">
+    <!-- ============ FORM SUBMIT TUGAS 1 ============ -->
+    <section class="active-task hidden" id="submitForm1Panel">
       <div class="active-task-head">
         <span class="pulse"></span>
-        <h3>Form Pengiriman</h3>
+        <h3>Form Pengiriman — Tugas 1</h3>
       </div>
 
-      <form id="submitForm" novalidate>
+      <form id="submitForm1" novalidate>
         <div class="form-group">
           <label class="form-label" for="usernameTiktok">Username TikTok</label>
           <input
@@ -149,12 +149,127 @@
 
         <div class="form-group">
           <label class="form-label">
-            <input type="checkbox" id="agreeRules" style="margin-right:6px;vertical-align:-1px;" />
+            <input type="checkbox" id="agreeRules1" style="margin-right:6px;vertical-align:-1px;" />
             Saya sudah baca & setuju dengan <b>rules penting</b> di atas
           </label>
         </div>
 
-        <button type="submit" class="btn btn-success" id="btnKirim" disabled>
+        <button type="submit" class="btn btn-success" id="btnKirim1" disabled>
+          <i data-lucide="check-circle"></i>
+          Kirim Sekarang
+        </button>
+      </form>
+    </section>
+
+    <!-- ======================================================
+         PANEL TUGAS 2 AKTIF
+         ====================================================== -->
+    <section class="active-task hidden" id="activeTask2Panel">
+      <div class="active-task-head">
+        <span class="pulse"></span>
+        <h3>Tugas 2 — Aktif</h3>
+      </div>
+
+      <ul class="materi-list">
+        <li>
+          <span class="num">1</span>
+          <span>Tekan tombol <b>Buka Bot Telegram</b> di bawah untuk mulai.</span>
+        </li>
+        <li>
+          <span class="num">2</span>
+          <span>Ikuti instruksi dari bot untuk membuat akun Gmail via bot tersebut.</span>
+        </li>
+        <li>
+          <span class="num">3</span>
+          <span>Buat <b>minimal 2 akun</b> dengan status <b>good / sukses</b>.</span>
+        </li>
+        <li>
+          <span class="num">4</span>
+          <span>Kalau sudah selesai, tekan tombol <b>Saya Sudah Menyelesaikan Tugas</b>.</span>
+        </li>
+        <li>
+          <span class="num">5</span>
+          <span>Masukkan <b>username Telegram</b> kamu di form yang muncul.</span>
+        </li>
+        <li>
+          <span class="num">6</span>
+          <span>Bayaran: <b>Rp1.000</b> flat (fixed) setelah verifikasi.</span>
+        </li>
+      </ul>
+
+      <div class="rules-box">
+        <div class="rules-head">
+          <i data-lucide="alert-triangle"></i>
+          <span>Rules Penting</span>
+        </div>
+
+        <ul class="rules-list">
+          <li>
+            <i data-lucide="shield-alert"></i>
+            <div>
+              <b>Wajib minimal 2 akun</b> dengan status <b>good / sukses</b>. Kalau gagal, ulangi sampai berhasil.
+            </div>
+          </li>
+          <li>
+            <i data-lucide="user-check"></i>
+            <div>
+              Username Telegram yang kamu isi <b>harus sama</b> dengan yang dipakai untuk membuat akun.
+            </div>
+          </li>
+          <li>
+            <i data-lucide="ban"></i>
+            <div>
+              Manipulasi data (screenshot palsu, akun buatan sendiri, dll) = <b>banned permanen</b>.
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tombol buka bot (link disembunyikan) -->
+      <button class="btn btn-primary" id="btnOpenBot" type="button">
+        <i data-lucide="send"></i>
+        Buka Bot Telegram
+      </button>
+
+      <!-- Tombol sudah selesai -->
+      <button class="btn btn-outline" id="btnDoneTask2" type="button" style="margin-top:10px;">
+        <i data-lucide="check-circle-2"></i>
+        Saya Sudah Menyelesaikan Tugas
+      </button>
+    </section>
+
+    <!-- ============ FORM SUBMIT TUGAS 2 ============ -->
+    <section class="active-task hidden" id="submitForm2Panel">
+      <div class="active-task-head">
+        <span class="pulse"></span>
+        <h3>Form Pengiriman — Tugas 2</h3>
+      </div>
+
+      <form id="submitForm2" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="usernameTelegram">Username Telegram</label>
+          <input
+            type="text"
+            id="usernameTelegram"
+            class="form-input"
+            placeholder="@username"
+            autocomplete="off"
+            required
+          />
+          <div class="form-hint">
+            <i data-lucide="info"></i>
+            <span>Isi username Telegram yang kamu pakai di bot (contoh: <b>@username</b>).</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <input type="checkbox" id="agreeRules2" style="margin-right:6px;vertical-align:-1px;" />
+            Saya konfirmasi sudah membuat <b>minimal 2 akun sukses</b>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-success" id="btnKirim2" disabled>
           <i data-lucide="check-circle"></i>
           Kirim Sekarang
         </button>
@@ -167,7 +282,7 @@
         <div class="section-title">Daftar Tugas</div>
       </div>
 
-      <!-- TUGAS 1 -->
+      <!-- ========== TUGAS 1 ========== -->
       <div class="task-card" id="taskCard1">
         <div class="task-head">
           <span class="task-badge active">Tersedia</span>
@@ -185,21 +300,34 @@
           <span class="per">/ 500 view</span>
         </div>
 
-        <button class="btn btn-primary" id="btnStartTask">
+        <button class="btn btn-primary" id="btnStartTask1">
           <i data-lucide="play-circle"></i>
           Start Task
         </button>
       </div>
 
-      <!-- TUGAS 2 -->
-      <div class="task-card disabled">
+      <!-- ========== TUGAS 2 ========== -->
+      <div class="task-card" id="taskCard2">
         <div class="task-head">
-          <span class="task-badge locked">
-            <i data-lucide="lock"></i>Locked
-          </span>
+          <span class="task-badge active">Tersedia</span>
         </div>
-        <div class="task-title">Tugas 2</div>
-        <div class="task-desc">Coming soon. Pantau terus ya!</div>
+        <div class="task-title">
+          <i data-lucide="bot"></i>
+          Buat 2 Akun via Bot Telegram
+        </div>
+        <div class="task-desc">
+          Buat minimal 2 akun (status good/sukses) via bot Telegram. Simpel & cepat.
+        </div>
+
+        <div class="task-meta">
+          <span class="amount">Rp1.000</span>
+          <span class="per">/ tugas (flat)</span>
+        </div>
+
+        <button class="btn btn-primary" id="btnStartTask2">
+          <i data-lucide="play-circle"></i>
+          Start Task
+        </button>
       </div>
 
     </section>
@@ -239,26 +367,48 @@
   <script>
     lucide.createIcons();
 
-    /* ========== ELEMEN ========== */
-    const btnStartTask   = document.getElementById('btnStartTask');
-    const btnShowForm    = document.getElementById('btnShowForm');
-    const btnKirim       = document.getElementById('btnKirim');
-    const agreeRules     = document.getElementById('agreeRules');
-    const activePanel    = document.getElementById('activeTaskPanel');
-    const formPanel      = document.getElementById('submitFormPanel');
-    const submitForm     = document.getElementById('submitForm');
-    const taskCard1      = document.getElementById('taskCard1');
+    /* =========================================================
+       KONFIG — LINK BOT DISEMBUNYIKAN DI SINI
+       ========================================================= */
+    const TELEGRAM_BOT_URL = 'https://telegram.me/KirimGmailBot?start=8732880108';
 
-    /* ========== STATE ========== */
-    const taskActive = localStorage.getItem('fortech_task1_active') === '1';
-    const taskDone   = localStorage.getItem('fortech_task1_done') === '1';
+    /* =========================================================
+       TUGAS 1 — ELEMEN
+       ========================================================= */
+    const btnStartTask1 = document.getElementById('btnStartTask1');
+    const btnShowForm1  = document.getElementById('btnShowForm1');
+    const btnKirim1     = document.getElementById('btnKirim1');
+    const agreeRules1   = document.getElementById('agreeRules1');
+    const activeTask1   = document.getElementById('activeTask1Panel');
+    const submitForm1P  = document.getElementById('submitForm1Panel');
+    const submitForm1   = document.getElementById('submitForm1');
+    const taskCard1     = document.getElementById('taskCard1');
 
-    if (taskActive && !taskDone) {
-      activePanel.classList.remove('hidden');
+    /* =========================================================
+       TUGAS 2 — ELEMEN
+       ========================================================= */
+    const btnStartTask2 = document.getElementById('btnStartTask2');
+    const btnOpenBot    = document.getElementById('btnOpenBot');
+    const btnDoneTask2  = document.getElementById('btnDoneTask2');
+    const btnKirim2     = document.getElementById('btnKirim2');
+    const agreeRules2   = document.getElementById('agreeRules2');
+    const activeTask2   = document.getElementById('activeTask2Panel');
+    const submitForm2P  = document.getElementById('submitForm2Panel');
+    const submitForm2   = document.getElementById('submitForm2');
+    const taskCard2     = document.getElementById('taskCard2');
+
+    /* =========================================================
+       RESTORE STATE
+       ========================================================= */
+    // Tugas 1
+    const t1Active = localStorage.getItem('fortech_task1_active') === '1';
+    const t1Done   = localStorage.getItem('fortech_task1_done') === '1';
+
+    if (t1Active && !t1Done) {
+      activeTask1.classList.remove('hidden');
       taskCard1.classList.add('disabled');
     }
-
-    if (taskDone) {
+    if (t1Done) {
       taskCard1.classList.add('disabled');
       taskCard1.querySelector('.task-badge').textContent = 'Selesai';
       taskCard1.querySelector('.task-badge').classList.remove('active');
@@ -267,56 +417,57 @@
       taskCard1.querySelector('.btn').disabled = true;
     }
 
-    /* ========== START TASK ========== */
-    btnStartTask.addEventListener('click', () => {
+    // Tugas 2
+    const t2Active = localStorage.getItem('fortech_task2_active') === '1';
+    const t2Done   = localStorage.getItem('fortech_task2_done') === '1';
+
+    if (t2Active && !t2Done) {
+      activeTask2.classList.remove('hidden');
+      taskCard2.classList.add('disabled');
+    }
+    if (t2Done) {
+      taskCard2.classList.add('disabled');
+      taskCard2.querySelector('.task-badge').textContent = 'Selesai';
+      taskCard2.querySelector('.task-badge').classList.remove('active');
+      taskCard2.querySelector('.task-badge').classList.add('locked');
+      taskCard2.querySelector('.btn').textContent = 'Sudah Dikirim';
+      taskCard2.querySelector('.btn').disabled = true;
+    }
+
+    /* =========================================================
+       TUGAS 1 — FLOW
+       ========================================================= */
+    btnStartTask1.addEventListener('click', () => {
       localStorage.setItem('fortech_task1_active', '1');
-      activePanel.classList.remove('hidden');
+      activeTask1.classList.remove('hidden');
       taskCard1.classList.add('disabled');
-      activePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      activeTask1.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-    /* ========== SHOW FORM ========== */
-    btnShowForm.addEventListener('click', () => {
-      formPanel.classList.remove('hidden');
-      formPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    btnShowForm1.addEventListener('click', () => {
+      submitForm1P.classList.remove('hidden');
+      submitForm1P.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
-    /* ========== CHECKBOX → TOGGLE BUTTON ========== */
-    agreeRules.addEventListener('change', () => {
-      btnKirim.disabled = !agreeRules.checked;
+    agreeRules1.addEventListener('change', () => {
+      btnKirim1.disabled = !agreeRules1.checked;
     });
 
-    /* ========== SUBMIT FORM ========== */
-    submitForm.addEventListener('submit', (e) => {
+    submitForm1.addEventListener('submit', (e) => {
       e.preventDefault();
 
       const username = document.getElementById('usernameTiktok').value.trim();
       const link     = document.getElementById('linkVideo').value.trim();
 
-      if (!username) {
-        alert('Username TikTok wajib diisi ya!');
-        return;
-      }
-      if (!link || !link.startsWith('http')) {
-        alert('Link video TikTok tidak valid.');
-        return;
-      }
-      if (!agreeRules.checked) {
-        alert('Kamu harus setuju dengan rules penting dulu!');
-        return;
-      }
+      if (!username) { alert('Username TikTok wajib diisi ya!'); return; }
+      if (!link || !link.startsWith('http')) { alert('Link video TikTok tidak valid.'); return; }
+      if (!agreeRules1.checked) { alert('Kamu harus setuju dengan rules penting dulu!'); return; }
 
       const submission = {
         task: 'TUGAS 1 - Promosi gmail.cuan4dev.biz.id',
-        username,
-        link,
+        username, link,
         hashtags: ['#freelancegmail','#freelancegratis','#freelance4tech','#madeinfortechlab','#fortechdev'],
-        rules: {
-          no_view_injection: true,
-          min_comments: 25,
-          video_keep_30days: true,
-          single_account: true,
-        },
+        rules: { no_view_injection: true, min_comments: 25, video_keep_30days: true, single_account: true },
         date: new Date().toISOString(),
         status: 'pending',
       };
@@ -340,10 +491,81 @@
       taskCard1.querySelector('.btn').textContent = 'Sudah Dikirim';
       taskCard1.querySelector('.btn').disabled = true;
 
-      formPanel.classList.add('hidden');
-      activePanel.classList.add('hidden');
+      submitForm1P.classList.add('hidden');
+      activeTask1.classList.add('hidden');
 
-      alert('Tugas berhasil dikirim!\nCek status di halaman Riwayat.');
+      alert('Tugas 1 berhasil dikirim!\nCek status di halaman Riwayat.');
+      window.location.href = 'riwayat.html';
+    });
+
+    /* =========================================================
+       TUGAS 2 — FLOW
+       ========================================================= */
+    btnStartTask2.addEventListener('click', () => {
+      localStorage.setItem('fortech_task2_active', '1');
+      activeTask2.classList.remove('hidden');
+      taskCard2.classList.add('disabled');
+      activeTask2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // Tombol buka bot — link disembunyikan di JS
+    btnOpenBot.addEventListener('click', () => {
+      window.open(TELEGRAM_BOT_URL, '_blank', 'noopener,noreferrer');
+    });
+
+    // Tombol "sudah selesai" → munculin form
+    btnDoneTask2.addEventListener('click', () => {
+      submitForm2P.classList.remove('hidden');
+      submitForm2P.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    agreeRules2.addEventListener('change', () => {
+      btnKirim2.disabled = !agreeRules2.checked;
+    });
+
+    submitForm2.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      let usernameTg = document.getElementById('usernameTelegram').value.trim();
+
+      if (!usernameTg) { alert('Username Telegram wajib diisi ya!'); return; }
+      if (!usernameTg.startsWith('@')) usernameTg = '@' + usernameTg;
+      if (usernameTg.length < 5) { alert('Username Telegram terlalu pendek.'); return; }
+      if (!agreeRules2.checked) { alert('Kamu harus konfirmasi dulu ya!'); return; }
+
+      const submission = {
+        task: 'TUGAS 2 - Buat 2 Akun via Bot Telegram',
+        platform: 'telegram',
+        username: usernameTg,
+        bot_link: TELEGRAM_BOT_URL,
+        min_accounts: 2,
+        date: new Date().toISOString(),
+        status: 'pending',
+      };
+
+      const riwayat = JSON.parse(localStorage.getItem('fortech_riwayat') || '[]');
+      riwayat.unshift({
+        icon: 'bot',
+        title: 'Buat 2 Akun via Bot Telegram',
+        sub: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) + ' · Menunggu review',
+        amount: 'Rp0',
+        type: 'pending',
+      });
+      localStorage.setItem('fortech_riwayat', JSON.stringify(riwayat));
+
+      localStorage.setItem('fortech_task2_done', '1');
+      localStorage.setItem('fortech_task2_submission', JSON.stringify(submission));
+
+      taskCard2.querySelector('.task-badge').textContent = 'Selesai';
+      taskCard2.querySelector('.task-badge').classList.remove('active');
+      taskCard2.querySelector('.task-badge').classList.add('locked');
+      taskCard2.querySelector('.btn').textContent = 'Sudah Dikirim';
+      taskCard2.querySelector('.btn').disabled = true;
+
+      submitForm2P.classList.add('hidden');
+      activeTask2.classList.add('hidden');
+
+      alert('Tugas 2 berhasil dikirim!\nCek status di halaman Riwayat.');
       window.location.href = 'riwayat.html';
     });
   </script>
