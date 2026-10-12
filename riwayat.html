@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#eef1f6" />
+  <title>Riwayat — freelance.fortech</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- ============ HEADER ============ -->
+    <header class="header">
+      <div class="brand">freelance<span>.fortech</span></div>
+      <button class="header-icon" aria-label="Notifikasi">
+        <i data-lucide="bell"></i>
+      </button>
+    </header>
+
+    <!-- ============ PAGE TITLE ============ -->
+    <div class="page-title">
+      <h1>Riwayat</h1>
+      <p>Semua aktivitas kamu</p>
+    </div>
+
+    <!-- ============ TABS FILTER ============ -->
+    <div class="tabs">
+      <button class="tab active" data-filter="all">Semua</button>
+      <button class="tab" data-filter="tugas">Tugas</button>
+      <button class="tab" data-filter="wd">Withdraw</button>
+    </div>
+
+    <!-- ============ LIST RIWAYAT ============ -->
+    <section class="section">
+      <div class="tx-list" id="txList"></div>
+
+      <!-- Empty state (muncul kalau kosong) -->
+      <div class="empty-state hidden" id="emptyState">
+        <span class="emoji">🗂️</span>
+        <div class="title">Belum ada riwayat</div>
+        <div class="desc">Kerjakan tugas atau ajukan WD dulu ya!</div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============ BOTTOM NAV ============ -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <div class="icon"><i data-lucide="home"></i></div>
+      <span class="label">Beranda</span>
+    </a>
+
+    <a href="tugas.html" class="nav-item">
+      <div class="icon"><i data-lucide="clipboard-list"></i></div>
+      <span class="label">Tugas</span>
+    </a>
+
+    <a href="wd.html" class="nav-item">
+      <div class="icon"><i data-lucide="wallet"></i></div>
+      <span class="label">Withdraw</span>
+    </a>
+
+    <a href="riwayat.html" class="nav-item active">
+      <div class="icon"><i data-lucide="history"></i></div>
+      <span class="label">Riwayat</span>
+    </a>
+
+    <a href="akun.html" class="nav-item">
+      <div class="icon"><i data-lucide="user"></i></div>
+      <span class="label">Akun</span>
+    </a>
+  </nav>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+
+    /* ========== ELEMEN ========== */
+    const txList     = document.getElementById('txList');
+    const emptyState = document.getElementById('emptyState');
+    const tabs       = document.querySelectorAll('.tab');
+
+    /* ========== DATA ========== */
+    // Ambil dari localStorage. Kalau kosong → array kosong.
+    let riwayat = JSON.parse(localStorage.getItem('fortech_riwayat') || '[]');
+
+    let currentFilter = 'all';
+
+    /* ========== RENDER ========== */
+    function render() {
+      // filter data
+      const filtered = riwayat.filter(item => {
+        if (currentFilter === 'all') return true;
+        if (currentFilter === 'tugas') return item.icon === 'video' || item.title.toLowerCase().includes('promosi');
+        if (currentFilter === 'wd') return item.icon === 'wallet' || item.title.toLowerCase().includes('withdraw');
+        return true;
+      });
+
+      // kalau kosong
+      if (filtered.length === 0) {
+        txList.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        lucide.createIcons();
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+
+      // render list
+      txList.innerHTML = filtered.map(item => {
+        const amountClass = item.type === 'minus' ? 'minus'
+                          : item.type === 'plus'  ? 'plus'
+                          : '';
+        const iconName = item.icon === 'wallet' ? 'wallet'
+                        : item.icon === 'video' ? 'video'
+                        : 'circle-dot';
+
+        return `
+          <div class="tx-item">
+            <div class="tx-icon">
+              <i data-lucide="${iconName}"></i>
+            </div>
+            <div class="tx-body">
+              <div class="tx-title">${escapeHtml(item.title)}</div>
+              <div class="tx-sub">${escapeHtml(item.sub)}</div>
+            </div>
+            <div class="tx-amount ${amountClass}">${escapeHtml(item.amount)}</div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    /* ========== ESCAPE HTML (biar aman dari XSS) ========== */
+    function escapeHtml(str) {
+      if (str == null) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    /* ========== TAB SWITCH ========== */
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentFilter = tab.dataset.filter;
+        render();
+      });
+    });
+
+    /* ========== INIT ========== */
+    render();
+  </script>
+
+</body>
+</html>
