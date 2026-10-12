@@ -29,13 +29,14 @@
       <p>Promosikan, dapat cuan 💰</p>
     </div>
 
-    <!-- ============ PANEL TUGAS AKTIF (hidden default) ============ -->
+    <!-- ============ PANEL TUGAS AKTIF ============ -->
     <section class="active-task hidden" id="activeTaskPanel">
       <div class="active-task-head">
         <span class="pulse"></span>
         <h3>Tugas Aktif</h3>
       </div>
 
+      <!-- LANGKAH-LANGKAH -->
       <ul class="materi-list">
         <li>
           <span class="num">1</span>
@@ -53,7 +54,7 @@
           <span class="num">4</span>
           <span>
             <b>WAJIB</b> sertakan hashtag berikut di caption:
-            <div class="hashtag-box" style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;">
+            <div class="hashtag-box">
               <span class="hashtag">#freelancegmail</span>
               <span class="hashtag">#freelancegratis</span>
               <span class="hashtag">#freelance4tech</span>
@@ -72,13 +73,49 @@
         </li>
       </ul>
 
+      <!-- ============ RULES PENTING ============ -->
+      <div class="rules-box">
+        <div class="rules-head">
+          <i data-lucide="alert-triangle"></i>
+          <span>Rules Penting — Wajib Dibaca</span>
+        </div>
+
+        <ul class="rules-list">
+          <li>
+            <i data-lucide="shield-alert"></i>
+            <div>
+              <b>Dilarang keras menyuntik view</b> (bot, panel, atau cara curang apapun).
+              <span class="danger-text">Risiko: akun TikTok kamu diblokir permanen & saldo hangus.</span>
+            </div>
+          </li>
+          <li>
+            <i data-lucide="message-circle"></i>
+            <div>
+              <b>Minimal 25 komentar</b> di video kamu. Komentar harus relevan & natural, bukan spam.
+            </div>
+          </li>
+          <li>
+            <i data-lucide="video"></i>
+            <div>
+              Video <b>tidak boleh dihapus</b> minimal 30 hari sejak submit, biar view tetap kehitung.
+            </div>
+          </li>
+          <li>
+            <i data-lucide="user-x"></i>
+            <div>
+              Satu akun TikTok hanya boleh untuk <b>1 submission per tugas</b>. Multi-akun = banned.
+            </div>
+          </li>
+        </ul>
+      </div>
+
       <button class="btn btn-primary" id="btnShowForm">
         <i data-lucide="send"></i>
         Submit Tugas
       </button>
     </section>
 
-    <!-- ============ FORM SUBMIT (hidden default) ============ -->
+    <!-- ============ FORM SUBMIT ============ -->
     <section class="active-task hidden" id="submitFormPanel">
       <div class="active-task-head">
         <span class="pulse"></span>
@@ -110,7 +147,14 @@
           />
         </div>
 
-        <button type="submit" class="btn btn-success" id="btnKirim">
+        <div class="form-group">
+          <label class="form-label">
+            <input type="checkbox" id="agreeRules" style="margin-right:6px;vertical-align:-1px;" />
+            Saya sudah baca & setuju dengan <b>rules penting</b> di atas
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-success" id="btnKirim" disabled>
           <i data-lucide="check-circle"></i>
           Kirim Sekarang
         </button>
@@ -133,7 +177,7 @@
           Promosi gmail.cuan4dev.biz.id
         </div>
         <div class="task-desc">
-          Buat video promosi website gmail.cuan4dev.biz.id di TikTok kamu. Wajib pakai hashtag yang ditentukan. Semakin banyak view, semakin besar bayarannya.
+          Buat video promosi website gmail.cuan4dev.biz.id di TikTok. Wajib pakai hashtag & dapat min. 25 komentar.
         </div>
 
         <div class="task-meta">
@@ -147,7 +191,7 @@
         </button>
       </div>
 
-      <!-- TUGAS 2 (coming soon) -->
+      <!-- TUGAS 2 -->
       <div class="task-card disabled">
         <div class="task-head">
           <span class="task-badge locked">
@@ -198,6 +242,8 @@
     /* ========== ELEMEN ========== */
     const btnStartTask   = document.getElementById('btnStartTask');
     const btnShowForm    = document.getElementById('btnShowForm');
+    const btnKirim       = document.getElementById('btnKirim');
+    const agreeRules     = document.getElementById('agreeRules');
     const activePanel    = document.getElementById('activeTaskPanel');
     const formPanel      = document.getElementById('submitFormPanel');
     const submitForm     = document.getElementById('submitForm');
@@ -235,6 +281,11 @@
       formPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
+    /* ========== CHECKBOX → TOGGLE BUTTON ========== */
+    agreeRules.addEventListener('change', () => {
+      btnKirim.disabled = !agreeRules.checked;
+    });
+
     /* ========== SUBMIT FORM ========== */
     submitForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -250,12 +301,22 @@
         alert('Link video TikTok tidak valid.');
         return;
       }
+      if (!agreeRules.checked) {
+        alert('Kamu harus setuju dengan rules penting dulu!');
+        return;
+      }
 
       const submission = {
         task: 'TUGAS 1 - Promosi gmail.cuan4dev.biz.id',
         username,
         link,
         hashtags: ['#freelancegmail','#freelancegratis','#freelance4tech','#madeinfortechlab','#fortechdev'],
+        rules: {
+          no_view_injection: true,
+          min_comments: 25,
+          video_keep_30days: true,
+          single_account: true,
+        },
         date: new Date().toISOString(),
         status: 'pending',
       };
